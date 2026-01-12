@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Operations Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, #0f172a, #1e293b);
+            padding: 80px 0 40px;
+            border-bottom: 1px solid #334155;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            max-width: 600px;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: -30px 0 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .metric-title {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .status {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .status.critical { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .status.warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .status.good { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+
+        /* Content Sections */
+        section {
+            padding: 60px 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            border-left: 4px solid var(--primary);
+            padding-left: 16px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        .chart-container {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .chart-caption {
+            margin-top: 15px;
+            color: var(--text-gray);
+            font-style: italic;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid #334155;
+        }
+
+        th {
+            background: #0f172a;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-gray);
+            border-top: 1px solid #334155;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Hospital Operations Analysis</h1>
+            <p>Optimizing patient flow and resource allocation through data-driven insights. Analysis of 5,000 synthetic patient records.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-title">Avg Registration Wait</div>
+                <div class="metric-value">18.2 min</div>
+                <div class="status warning">⚠️ At Risk</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-title">Avg Doctor Wait</div>
+                <div class="metric-value">28.5 min</div>
+                <div class="status critical">❌ Critical</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-title">Critical Care Wait</div>
+                <div class="metric-value">4.9 min</div>
+                <div class="status good">✅ Optimized</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-title">Total Visit Time</div>
+                <div class="metric-value">65.2 min</div>
+                <div class="status warning">⚠️ At Risk</div>
+            </div>
+        </div>
+
+        <!-- 1. Wait Time Analysis -->
+        <section>
+            <h2>Wait Time Distributions</h2>
+            <p>Our analysis reveals a significant "long tail" in patient wait times. While the median wait is manageable, a substantial number of patients experience delays exceeding 45 minutes before seeing a physician.</p>
+            <div class="chart-container">
+                <img src="assets/univariate_distributions.png" alt="Distribution of Wait Times">
+                <div class="chart-caption">Figure 1: Distribution of key time metrics across all visits.</div>
+            </div>
+        </section>
+
+        <!-- 2. Triage Effectiveness -->
+        <section>
+            <h2>Triage System Effectiveness</h2>
+            <p>The triage protocol is functioning as intended. Critical patients are successfully prioritized, bypassing the standard queues. However, this comes at the cost of significantly higher delays for "Medium" and "Low" priority cases.</p>
+            <div class="chart-container">
+                <img src="assets/triage_effectiveness.png" alt="Triage Effectiveness Boxplot">
+                <div class="chart-caption">Figure 2: Boxplot comparing doctor wait times by triage level. Note the tight distribution for Critical cases.</div>
+            </div>
+        </section>
+
+        <!-- 3. Doctor Load -->
+        <section>
+            <h2>Resource Allocation & Doctor Load</h2>
+            <p>There is a notable imbalance in doctor utilization. Top performers (e.g., D016, D004) are handling over 260 patients, while others handle significantly fewer. This variance suggests an opportunity for better shift scheduling.</p>
+            <div class="chart-container">
+                <img src="assets/doctor_load_analysis.png" alt="Doctor Load Scatter Plot">
+                <div class="chart-caption">Figure 3: Doctor efficiency map. Larger bubbles indicate longer average patient wait times for that doctor.</div>
+            </div>
+        </section>
+
+        <!-- 4. Temporal Patterns -->
+        <section>
+            <h2>Temporal Flow Patterns</h2>
+            <p>Patient arrival volume follows distinct daily patterns. Wait times spike predictably during specific "red zone" hours where demand outstrips active registration counters.</p>
+            <div class="chart-container">
+                <img src="assets/hourly_arrival_pattern.png" alt="Hourly Arrival Pattern">
+                <div class="chart-caption">Figure 4: Patient arrival volume by hour of day.</div>
+            </div>
+            <div class="chart-container">
+                <img src="assets/wait_time_heatmap.png" alt="Wait Time Heatmap">
+                <div class="chart-caption">Figure 5: Heatmap showing wait time intensity by Day of Week and Hour.</div>
+            </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section>
+            <h2>Strategic Recommendations</h2>
+            <div class="metrics-grid" style="grid-template-columns: 1fr; margin: 0;">
+                <div class="metric-card" style="border-left: 4px solid var(--primary);">
+                    <h3 style="color: var(--text-light); margin-bottom: 10px;">1. Redistribute High-Volume Shifts</h3>
+                    <p style="margin: 0;">Data indicates burnout risk for top 5 doctors. We recommend implementing a "Float Pool" of physicians to cover peak hours for these high-volume providers.</p>
+                </div>
+                <div class="metric-card" style="border-left: 4px solid var(--warning);">
+                    <h3 style="color: var(--text-light); margin-bottom: 10px;">2. Implement "Fast Track" Lane</h3>
+                    <p style="margin: 0;">Since 40% of patients are Low/Medium acuity but wait >30 mins, a Nurse Practitioner-led Fast Track lane could reduce physician load by ~25%.</p>
+                </div>
+                 <div class="metric-card" style="border-left: 4px solid var(--success);">
+                    <h3 style="color: var(--text-light); margin-bottom: 10px;">3. Flex-Staffing for Registration</h3>
+                    <p style="margin: 0;">Arrival spikes at 9 AM and 6 PM correlate with registration bottlenecks. Adding 2 part-time input staff during these windows will smooth the initial flow.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Hospital Operations Analysis Project | <a href="https://github.com/USERNAME/REPO" style="color: var(--primary);">View Code on GitHub</a></p>
+    </footer>
+
+</body>
+</html>
